@@ -1,0 +1,11 @@
+CREATE TABLE Account (ID int(10) NOT NULL AUTO_INCREMENT, Email varchar(255), Password varchar(255), Name varchar(255), Address varchar(255), GoogleID varchar(255), Telephone varchar(255), PRIMARY KEY (ID));
+CREATE TABLE Bill (ID int(10) NOT NULL AUTO_INCREMENT, CartID int(10) NOT NULL, AccountID int(10) NOT NULL, Total int(10) NOT NULL, Payment varchar(255), `Date` timestamp NULL, PRIMARY KEY (ID));
+CREATE TABLE Cart (ID int(10) NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID));
+CREATE TABLE Clothes (ID int(10) NOT NULL AUTO_INCREMENT, CategoryID int(10) NOT NULL, Name varchar(255), `Size` varchar(255), Price double NOT NULL, Company varchar(255), Country varchar(255), Image varchar(255), PRIMARY KEY (ID));
+CREATE TABLE Category (ID int(10) NOT NULL AUTO_INCREMENT, Name varchar(255), PRIMARY KEY (ID));
+CREATE TABLE Cart_Product (CartID int(10) NOT NULL, ProductID int(10) NOT NULL, Quantity int(10), PRIMARY KEY (CartID, ProductID));
+ALTER TABLE Bill ADD CONSTRAINT FKBill345937 FOREIGN KEY (AccountID) REFERENCES Account (ID);
+ALTER TABLE Bill ADD CONSTRAINT FKBill412412 FOREIGN KEY (CartID) REFERENCES Cart (ID);
+ALTER TABLE Cart_Product ADD CONSTRAINT FKCart_Produ230524 FOREIGN KEY (CartID) REFERENCES Cart (ID);
+ALTER TABLE Cart_Product ADD CONSTRAINT FKCart_Produ251256 FOREIGN KEY (ProductID) REFERENCES Product (ID);
+ALTER TABLE Product ADD CONSTRAINT FKProduct365906 FOREIGN KEY (CategoryID) REFERENCES Category (ID);
