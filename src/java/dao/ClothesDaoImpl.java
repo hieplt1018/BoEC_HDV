@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import model.Category;
 import model.Clothes;
 
@@ -176,4 +177,32 @@ public class ClothesDaoImpl implements ClothesDAO {
         return clothes;
     }
 
+    @Override
+    public List<Clothes> findName(String nameItem) {
+        String sql = "SELECT * FROM Clothes WHERE Name LIKE '%" + nameItem+"%'";
+        List<Clothes> list = new ArrayList<>();
+        System.out.println(sql);
+        try {
+            rs = connectdb.getStatement().executeQuery(sql);
+            while (rs.next()) {
+                Clothes clothes = new Clothes.ClothesBuilder().build();
+                clothes.setClothId(rs.getInt("ID"));
+                clothes.setCategoryId(rs.getInt("CategoryID"));
+                clothes.setName(rs.getString("Name"));
+                clothes.setSize(rs.getString("Size"));
+                clothes.setPrice(rs.getDouble("Price"));
+                clothes.setCountry(rs.getString("Country"));
+                clothes.setImage(rs.getString("Image"));
+                list.add(clothes);
+            }
+        } catch (Exception e) {
+            System.out.println("find Clothes failed!");
+        } 
+        return list;
+    }
+    public static void main(String[] args) {
+      ClothesDaoImpl clothesDaoImpl = new ClothesDaoImpl();
+        System.out.println(clothesDaoImpl.findName("AL18"));
+      
+    }
 }

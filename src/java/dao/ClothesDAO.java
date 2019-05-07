@@ -6,6 +6,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import model.Clothes;
 
 /**
@@ -20,4 +21,5 @@ public interface ClothesDAO {
     public void delete(int id);
     public int getNumberClothesByCategory(int CategoryId);
     public Clothes getClothesDetails(int clothid);
+    public List<Clothes> findName(String nameItem) ;
 }
